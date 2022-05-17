@@ -22,34 +22,34 @@ const CadastroForm = ({setRightButtonText}) => {
             value={form.name}
             name={'name'}
             onChange={onChange}
-            label={'Nome'}
-            variant={'outlined'}
-            fullWidth
+            placeholder={'Nome'}
             required
-            autoFocus
-            margin={'normal'}
           />
           <input
             value={form.email}
             name={'email'}
             onChange={onChange}
-            label={'E-mail'}
-            variant={'outlined'}
             type={'email'}
-            fullWidth
+            placeholder={'E-mail'}
             required
-            margin={'normal'}
           />
           <input
             value={form.password}
             name={'password'}
             onChange={onChange}
-            label={'Senha'}
-            variant={'outlined'}
             type={'password'}
-            fullWidth
+            placeholder={'Senha'}
             required
-            margin={'normal'}
+            pattern={"^.{8,}"}
+            title={"Sua senha deve ter no mínimo 8 caracteres."}
+          />
+          <input
+            value={form.password}
+            name={'password'}
+            onChange={onChange}
+            type={'password'}
+            placeholder={'Confirmar senha'}
+            required
           />
         </div>
         <button
