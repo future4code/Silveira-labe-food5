@@ -1,18 +1,20 @@
-import styled from "styled-Component";
+import styled from "styled-components";
 
 
-// export const MainContainer = styled.div `
-//     display: flex;
+export const InfoUser = styled.div `  `
+export const Name = styled.p `  `
+export const AddressUser = styled.div ` 
+    display:flex; 
+    flex-direction: column;
+    flex-wrap: nowrap;
+`
+export const Historic = styled.div ` 
+    display:flex; 
+    flex-direction: column;
+    flex-wrap: nowrap;
 
-// `
+`
 
-// export const Header = styled.header ` 
-//     display: flex;
-// `
-// export const Container = styled.div `
-//     display : flex; 
-
-// ` 
 
 
 
