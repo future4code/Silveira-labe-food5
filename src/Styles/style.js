@@ -17,3 +17,8 @@ export const Header = styled.header `
 
 `
 export const Title = styled.h1 `  `
+export const Form  = styled.form `  `
+export const Button= styled.div `  `
+export const Input= styled.div`  `
+
+
