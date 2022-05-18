@@ -2,31 +2,53 @@ import React from 'react'
 // import axios from 'axios'
 import { GlobalStateContext } from './GlobalStateContext'
 import { url } from '../constants/Url'
-
+import {useparams} from "react-router-dom"
 
 export default function GlobalState(props) {
-	const [restaurants , setrestaurants] = useState([]);
-    
-     const login = (body, Navigate) => {
-		axios.post(`${url}/login`, body)
-			 .then((response) => {
-				  localStorage.setItem("token", response.data.token)
-				  goToAdminPage(Navigate)
-								 })
-			 .catch((error) => alert(error.response.data.message))
-			 
-											 };
+	const params = useParams()
+const [restaurants , setrestaurants] = useState([]);
+const [menu, setmenu] = useState([]);
 
-											  const logout = (Navigate) => {
-												                localStorage.removeItem("token")
-																             goToLogin(Navigate)
-																			                                     }
-											 
-											 useEffect(() => {
-												getrestaurants(); 
-											  }, []);
-											
 
+
+
+
+useEffect(() => {
+ getrestaurants(); 
+ getrestaurantsDetails(); 
+
+ }, []); 
+
+const getrestaurants = () => {
+ axios.get(url, {headers:{auth: "coloque seu token aqui"}})
+ .then((response) => {
+ setrestaurants(response.data.restaurants)
+ })
+ .catch((error) => console.log(error.message))
+ }
+
+const getrestaurantsDetails = () =>{ 
+
+ axios.get( `${url}/futureEatsB/restaurants/${params.id}`, {headers: { auth: "token"} } 
+)
+ 
+.then((response)=>{setmenu(response.data.restaurants.products)} )
+
+ .catch((error) => console.log(error.message))
+ } 
+
+
+
+
+
+
+const data = {
+restaurant,
+setrestaurants,
+menu,
+ setmenu
+ 
+ };
 											  useEffect(() => {
 												const NovaList = [];
 												restaurantes.forEach((item) => {
@@ -43,24 +65,14 @@ export default function GlobalState(props) {
 												  .catch((error) => console.log(error.message));
 												});
 											  }, [restaurants]);
-    const getrestaurants = () => {
-		    axios.get(`${url}/restaurant`)
-			    .then((response) => {
-				      setrestaurants(response.data.results);
-					      })
-						      .catch((error) => console.log(error.message));
-							    };
+   
 
 	
     const states = {   }
 	const setters = {}
 	const requests = {}
 	const func = {}
-	const data = {
-		restaurant,
-		setrestaurants,
-		
-	  };
+	
     return (
 		<GlobalStateContext.Provider value={{states,setters,requests,func, data}}>
 			{props.children}
