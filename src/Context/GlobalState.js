@@ -1,42 +1,42 @@
-import React from 'react'
-// import axios from 'axios'
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
 import { GlobalStateContext } from './GlobalStateContext'
 import { url } from '../constants/Url'
-import {useparams} from "react-router-dom"
+// import {useparams} from "react-router-dom"
 
 export default function GlobalState(props) {
-	const params = useParams()
-	const { id } = useParams()
+	// const params = useParams()
+	// const { id } = useParams()
 	const [restaurants , setrestaurants] = useState([]);
-	const [menu, setmenu] = useState([]);
-	const [adress, setadress] = useState({});
-	const [profile, setprofile] = useState({});
-	const [updateprofile, setupdateprofile] =useState({});
-	const [order, setorder] = useState({});
+	// const [menu, setmenu] = useState([]);
+	// const [adress, setadress] = useState({});
+	// const [profile, setprofile] = useState({});
+	// const [updateprofile, setupdateprofile] =useState({});
+	// const [order, setorder] = useState({});
 	
 	
 	
-	const getData = () => { 
+	// const getData = () => { 
 	
-	        axios.get(`${url}${endpoint}`, {
-	                  headers: {auth: localStorage.getItem("token")}})
-	             .then((response) => setData(response.data))
-	             .catch((error) => alert(error.response.Data.message))
-	                           } 
+	//         axios.get(`${url}${endpoint}`, {
+	//                   headers: {auth: localStorage.getItem("token")}})
+	//              .then((response) => setData(response.data))
+	//              .catch((error) => alert(error.response.Data.message))
+	//     return [data, getData]
+	//                            } 
 	
-	    useEffect(() => { getData() }, [endpoint]) 
+	//     useEffect(() => { getData() }, [endpoint]) 
 	
-	    return [data, getData]
-	
+
 	
 	
 	useEffect(() => {
 	  getrestaurants(); 
-	      getrestaurantsDetails(); 
-	      getaddEndereco();
-	      getEndereco();
-	      getprofile();
-	      getorder();
+	//       getrestaurantsDetails(); 
+	//       getaddEndereco();
+	//       getEndereco();
+	//       getprofile();
+	//       getorder();
 	
 	  }, []); 
 	
@@ -52,7 +52,7 @@ export default function GlobalState(props) {
 	
 	useEffect(() => {
 		const NovaList = [];
-		restaurantes.forEach((item) => {
+		restaurants.forEach((item) => {
 		  axios.get(`${url}/restaurants`)
 		  .then((response) => {
 			NovaList.push(response.data);
@@ -67,100 +67,100 @@ export default function GlobalState(props) {
 		});
 	  }, [restaurants]);
 	
-	const getrestaurantsDetails = () =>{ 
+	// const getrestaurantsDetails = () =>{ 
 	
-	           axios.get( `${url}/futureEatsB/restaurants/${params.id}`, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{setmenu(response.data.restaurants.products)} )
-	                     
-	                    .catch((error) => console.log(error.message));
-	    } 
+	//            axios.get( `${url}/futureEatsB/restaurants/${params.id}`, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{setmenu(response.data.restaurants.products)} )
+	//                      
+	//                     .catch((error) => console.log(error.message));
+	//     } 
 	
 	 
 	
-	const getaddEndereco = () =>{ 
+	// const getaddEndereco = () =>{ 
 	
-	           axios.put( `${url}/futureEatsB/adress`, body, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{setadress(response.data.results)} )
-	                     
-	                    .catch((error) => console.log(error.message));
-	    }; 
-	
-	
-	
-	
-	
-	const getEndereco = () =>{ 
-	
-	           axios.get( `${url}/futureEatsB/profile/adress`, body, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{setadress(response.data.results)} )
-	                     
-	                    .catch((error) => console.log(error.message));
-	    }; 
+	//            axios.put( `${url}/futureEatsB/adress`, body, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{setadress(response.data.results)} )
+	//                      
+	//                     .catch((error) => console.log(error.message));
+	//     }; 
 	
 	
 	
 	
-	const getprofile = () =>{ 
 	
-	           axios.put( `${url}/futureEatsB/profile`, body, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{setprofile(response.data.results)} )
-	                     
-	                    .catch((error) => console.log(error.message));
-	    }; 
+	// const getEndereco = () =>{ 
 	
-	
-	
-	const getupdateprofile = (getprofile) => { 
-	axios.put(`${url}/futureEatsB/profile`, body, { headers: {auth: localStorage.getItem("token")} }) .then(() => { alert("Perfil atualizado") })  .catch((error) => alert(error.response.data.message))}
-	
-	
-	const order = (body,  clear) => {
-	    axios.post(`${url}/futureEatsB/restaurants/${restaurants.id}/order`, body)
-	         .then(() => {
-	            alert("Pedido feito")
-	            clear()
-	        })
-	         .catch((error) => alert(error.response.message))
-	} 
-	
-	const getorder = () =>{ 
-	
-	           axios.put( `${url}/futureEatsB/active-order`, body, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{order (response.data.results)} )
-	                     
-	                    .catch((error) => console.log(error.message))
-	    }
+	//            axios.get( `${url}/futureEatsB/profile/adress`, body, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{setadress(response.data.results)} )
+	//                      
+	//                     .catch((error) => console.log(error.message));
+	//     }; 
 	
 	
 	
-	const getorders = () =>{ 
 	
-	           axios.put( `${url}/futureEatsB/ordens/history`, {headers: { auth: "token"} } 
-	                             )
-	                     
-	                     .then((response)=>{order (response.data.results)} )
-	                     
-	                    .catch((error) => console.log(error.message))
-	    }
+	// const getprofile = () =>{ 
+	
+	//            axios.put( `${url}/futureEatsB/profile`, body, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{setprofile(response.data.results)} )
+	//                      
+	//                     .catch((error) => console.log(error.message));
+	//     }; 
+	
+	
+	
+	// const getupdateprofile = (getprofile) => { 
+	// axios.put(`${url}/futureEatsB/profile`, body, { headers: {auth: localStorage.getItem("token")} }) .then(() => { alert("Perfil atualizado") })  .catch((error) => alert(error.response.data.message))}
+	
+	
+	// const foodOrder = (body,  clear) => {
+	//     axios.post(`${url}/futureEatsB/restaurants/${restaurants.id}/order`, body)
+	//          .then(() => {
+	//             alert("Pedido feito")
+	//             clear()
+	//         })
+	//          .catch((error) => alert(error.response.message))
+	// } 
+	
+	// const getorder = () =>{ 
+	
+	//            axios.put( `${url}/futureEatsB/active-order`, body, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{order (response.data.results)} )
+	//                      
+	//                     .catch((error) => console.log(error.message))
+	//     }
+	
+	
+	
+	// const getorders = () =>{ 
+	
+	//            axios.put( `${url}/futureEatsB/ordens/history`, {headers: { auth: "token"} } 
+	//                              )
+	//                      
+	//                      .then((response)=>{order (response.data.results)} )
+	//                      
+	//                     .catch((error) => console.log(error.message))
+	//     }
 	
 	
 	const data = {
-	restaurant,
-	setrestaurants,
-	menu,
-	       setmenu
-	        
-	  };
+	restaurants,
+	// setrestaurants,
+	// menu,
+	//        setmenu
+	//         
+	};
 	
     const states = {   }
 	const setters = {}
