@@ -1,17 +1,16 @@
 import React from 'react';
-
+import { ThemeProvider } from '@material-ui/core/styles';
 import Router from './Routes/Router';
 import GlobalState from './Context/GlobalState';
-
+import theme from "./Constants/theme.js"
 
 export default function App() {
 	return (
-		<>
+		<ThemeProvider theme={theme}>
 			<GlobalState>
 				<Router /> 
-				
 			</GlobalState>
-		</>
+		</ThemeProvider>
 	);
 }
 

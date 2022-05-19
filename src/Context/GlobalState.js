@@ -1,22 +1,56 @@
-import React from 'react'
-// import axios from 'axios'
-import { GlobalStateContext } from './GlobalStateContext'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import GlobalStateContext from './GlobalStateContext'
+import { url } from '../Constants/Url'
+import { goToHomePage, goToLogin } from '../Routes/coordinator'
 
+function GlobalState(props) {
+	const [restaurants , setrestaurants] = useState([]);
+											 
+	useEffect(() => {
+		getrestaurants(); 
+	}, []);
+											
+	useEffect(() => {
+		const NovaList = [];
+		restaurants.forEach((item) => {
+			axios.get(`${url}/restaurants`)
+			.then((response) => {
+				NovaList.push(response.data);
+				if (NovaList.length === 3) {
+					const ListOrdern = NovaList.sort((a, b) => {
+						return a.id - b.id;
+					});
+					setrestaurants(ListOrdern);
+				}
+			})
+			.catch((error) => console.log(error.message));
+		});
+	}, [restaurants]);
 
+    const getrestaurants = () => {
+		axios.get(`${url}/restaurants`)
+		.then((response) => {
+			setrestaurants(response.data.results);
+		})
+		.catch((error) => console.log(error.message));
+	};
 
-export default function GlobalState(props) {
 	
-    
-    
-    
-    const states = {   }
-	const setters = {}
-	const requests = {}
-	const func = {}
+    const states = {};
+	const setters = {};
+	const requests = {};
+	const func = {};
+	const data = {
+		restaurants,
+		setrestaurants,
+	};
 
     return (
-		<GlobalStateContext.Provider value={{states,setters,requests,func}}>
+		<GlobalStateContext.Provider value={{states,setters,requests,func, data}}>
 			{props.children}
 		</GlobalStateContext.Provider>
 	)
-}
+};
+
+export default GlobalState;

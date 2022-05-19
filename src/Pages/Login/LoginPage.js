@@ -1,25 +1,25 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../Hooks/useForm";
+import useForm from "../../Hooks/useForm";
 import { CadastroPage, goToHomePage } from "../../Routes/coordinator";
-import { url } from "../../constants/Url";
+import { url } from "../../Constants/Url";
 import { Container, HeaderContainer, Nome1, Nome2, Titulo, InputsContainer, ButtonContainer, CadastroContainer } from "./LoginStyle";
 
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { form, onChange, clear } = useForm({ email: "", password: "" });
+  const { form, onChange, cleanField } = useForm({ email: "", password: "" });
   const login = (event) => {
     event.preventDefault();
     axios
-      .post(`${url}/users/login`, form)
+      .post(`${url}/login`, form)
       .then((res) => {
         console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
         goToHomePage(navigate);
-        clear();
+        cleanField();
       })
       .catch((error) => {
         alert(error);
@@ -52,8 +52,8 @@ const LoginPage = () => {
             placeholder="Mínimo 6 caracteres"
             name="password"
             type={"password"}
-            value={""}
-            onChange={""}
+            value={form.password}
+            onChange={onChange}
             pattern={"^.{6,}"}
             margin={"normal"}
             variant={"outlined"}
@@ -68,8 +68,8 @@ const LoginPage = () => {
 
         <CadastroContainer>
           <p>
-            Não possui cadastro?
-            <span onClick={() => CadastroPage(navigate)}>Clique aqui</span>
+            Não possui cadastro? 
+            <span onClick={() => CadastroPage(navigate)}> Clique aqui</span>
           </p>
         </CadastroContainer>
       </form>

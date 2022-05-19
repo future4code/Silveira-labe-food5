@@ -7,9 +7,9 @@ import LoginPage from '../Pages/Login/LoginPage';
 import PerfilPage from '../Pages/Perfil/PerfilPage';
 import RestaurantePage from '../Pages/Restaurante/RestaurantePage'
 import BuscarRestaurante from '../Pages/BuscarRestaurante/BuscarRestaurante'
-import CadastroPage from '../Pages/Cadastro/CadastroPage'
+import CadastroPage from '../Pages/Cadastro/CadastroPages/CadastroPage.js'
 import CarrinhoPage from '../Pages/Carrinho/CarrinhoPage'
-
+import EnderecoPage from '../Pages/Cadastro/Endereco/EnderecoPage.js';
 
 
 const Router = () => {
@@ -22,6 +22,7 @@ const Router = () => {
                 <Route path="/restaurante" element={ <RestaurantePage  /> } />
                 <Route path="/buscarRestaurante" element={ <BuscarRestaurante  /> } />
                 <Route path="/cadastro" element={ <CadastroPage  /> } />
+                <Route path="/endereco" element={ <EnderecoPage  /> } />
                 <Route path="/carrinho" element={ <CarrinhoPage  /> } />
             </Routes>
         </BrowserRouter>

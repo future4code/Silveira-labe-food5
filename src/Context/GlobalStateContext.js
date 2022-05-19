@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 
-export const GlobalStateContext = React.createContext()
+const GlobalStateContext = React.createContext()
+
+export default GlobalStateContext;
 
 export const useGlobal = () => {
     return(

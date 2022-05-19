@@ -10,6 +10,14 @@ export const goBack = (navigate) => {
     navigate(-1);
 }
 
+export const goToLogin = (navigate) => {
+    navigate("/login");
+}
+
 export const CadastroPage = (navigate) => {
     navigate("/cadastro")
+}
+
+export const goToEndereco = (navigate) => {
+    navigate("/endereco")
 }
