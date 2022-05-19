@@ -1,10 +1,11 @@
 
 import React, {useState, useEffect} from 'react';
-import { useForm } from '../../../Hooks/useForm';
+import  {useForm}  from '../../../Hooks/useForm';
 import { MainContainer, Form, Input, Button } from '../../../Styles/style';
 
 export const changeAddress = props => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { form, onChange, cleanField } = useForm({name:'',email:'',cpf:0})
 
     const doCheckIn = e => {

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 
-
+import axios from 'axios';
+import { url } from '../../constants/Url'
 import { useForm } from '../../Hooks/useForm';
 import {InfoUser, Name, AddressUser, Historic} from './style'
 
@@ -8,8 +9,55 @@ import { MainContainer, Header, Container, Title } from '../../Styles/style'
 
 
 export default function Perfil () {
+    const [perfil,setPerfil] = useState({})
+    const [address,setAddress] = useState({})
+    
+    const token = {"auth":          
+        {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InVESFVjN2l5emcwblpYTDBvdVB3IiwibmFtZSI6IkJlcm5hcmRvIiwiZW1haWwiOiJiZXJuYXJkb0BicmFnYS5jb20iLCJjcGYiOiI4ODEuMTc0LjAyMy00NSIsImhhc0FkZHJlc3MiOmZhbHNlLCJpYXQiOjE2NTI5ODAxOTV9.36GL3dIsTvJIpdXHFrOf6vxAyASKtG5alpxJ29npXy4"}
+    }
+    
+    useEffect(()=>{
+        getProfile()
+        getFullAddress()
+    },[])
 
+	const getFullAddress = async () => {
+	   
+		try {
+			const response = await axios.get(`${url}/profile/address`, token )
+			console.log(response.data);
+		} catch (err) {
+			console.log('deu erro no getFullAddress');
+			console.log(err.message);
+		}
+	}
+	const getProfile = async () => {
+	   
+		try {
+			const response = await axios.get(`${url}/profile`,token  )
+			console.log(response.data);
+		} catch (err) {
+			console.log('deu erro no getProfile');
+			console.log(err.message);
+		}
+	}
 
+	const putUpdateProfile = async (body) => {
+	   /*body tem que ser igual a ==
+	   body:{
+	"name": "Astrodev",
+	"email": "astrodev@future4.com",
+	"cpf": "111.111.111-13"
+}*/
+		try {
+			const response = await axios.put(`${url}/profile`, body, {auth: localStorage.getItem("token")} )
+			console.log(response.data);
+		} catch (err) {
+			console.log('deu erro no putUpdateProfile');
+			console.log(err.message);
+		}
+	}
+	
     return (
         <MainContainer>
             
