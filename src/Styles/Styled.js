@@ -1,5 +1,15 @@
 import styled from 'styled-components';
 import { primaryColor, secondaryColor } from "../Constants/colors";
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+`;
 
 export const StyledLogo = styled.div `
     display: flex;
@@ -43,8 +53,9 @@ export const InputContainer = styled.div `
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     width: 100%;
-    /* max-width: 600px; */
+    max-width: 600px;
 `;
 
 export const MainContainer = styled.div `

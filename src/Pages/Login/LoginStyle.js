@@ -67,9 +67,8 @@ export const ButtonContainer = styled.div `
 `
 
 export const CadastroContainer = styled.div `
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, regular;
-    font-size: 13px;
-    font-weight: bold;
     display: flex;
-    margin-left: 20vw;
+    span:hover {
+        cursor: pointer;
+    }
 `

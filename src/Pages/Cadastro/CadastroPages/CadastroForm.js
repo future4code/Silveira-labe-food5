@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import useForm from "../../../Hooks/useForm.js";
 import { signUp } from '../../../services/User.js';
@@ -7,18 +7,19 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 //Input password import:
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
 import { ScreenContainer, InputContainer, StyledLogo, StyledForm } from '../../../Styles/Styled.js';
+import { GlobalStateContext } from '../../../Context/GlobalStateContext.js';
+import Header from '../../../Components/Header/Header.js';
+import { StyledIcon, StyledInputPassword } from './Styled.js';
 
 const CadastroForm = () => {
   const navigate = useNavigate();
   
+  const { data } = useContext(GlobalStateContext);
+  const { setNameHeader, setButtonBack } = data;
+
   const { form, onChange, cleanField } = useForm({ name: '', email: '', cpf: '', password: '' });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -26,6 +27,12 @@ const CadastroForm = () => {
   const [ helper, setHelper ] = useState("");
   const [ error, setError ] = useState(false);
   const [ showPassword, setShowPassword ] = useState(false);
+  const [ showPasswordSnd, setShowPasswordSnd ] = useState(false);
+
+  useEffect(() => {
+    setNameHeader("");
+    setButtonBack(true);
+  },[]);
 
   const onSubmitForm = (event) => {
     event.preventDefault();
@@ -44,6 +51,7 @@ const CadastroForm = () => {
 
   return (
     <ScreenContainer>
+      <Header/>
       <InputContainer>
         <StyledLogo>
           <p id='main-text'>Future <span id='snd-text'>Eats</span></p>
@@ -92,65 +100,50 @@ const CadastroForm = () => {
             pattern={"[0-9]{3}[.][0-9]{3}[.][0-9]{3}[-][0-9]{2}"}
             title={"Deve seguir o formato: 000.000.000-00."}
           />
-          <TextField
-            margin='normal'
-            fullWidth
-            id="outlined-disabled" 
-            label="Senha"
-            variant="outlined"
-            InputLabelProps={{ shrink: true }}
-            value={form.password}
-            onChange={onChange}
-            name={'password'}
-            type={showPassword ? 'text' : 'password'}
-            placeholder={'Mínimo 6 caracteres'}
-            required
-            pattern={"^.{6,}"}
-            title={"Sua senha deve ter no mínimo 6 caracteres."}
-            
-          />
-          {/* <FormControl variant="outlined">
-          <InputLabel htmlFor="outlined-disabled">Senha</InputLabel>
-          <OutlinedInput
-            pattern={"^.{6,}"}
-            title={"Sua senha deve ter no mínimo 6 caracteres."}
-            id="outlined-disabled"
-            type={showPassword ? 'text' : 'password'}
-            value={form.password}
-            name={'password'}
-            onChange={onChange}
-            placeholder={'Mínimo 6 caracteres'}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="password visibility"
-                  onClick={(e) => setShowPassword(!showPassword)}
-                  edge="end"
-                >
-                  {showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>
-            }
-            labelWidth={70}
-            required
-          />
-          </FormControl> */}
-          <TextField
-            margin='normal'
-            fullWidth
-            id="outlined-disabled" 
-            label="Confirmar senha" 
-            variant="outlined" 
-            InputLabelProps={{ shrink: true }}
-            value={passwordSnd}
-            name={'passwordSnd'}
-            onChange={(e) => setPasswordSnd(e.target.value)}
-            type={'password'}
-            placeholder={'Confirmar senha'}
-            required
-            helperText={helper}
-            error={error}  
-          />
+          <StyledInputPassword>
+            <TextField
+              margin='normal'
+              fullWidth
+              id="outlined-disabled" 
+              label="Senha"
+              variant="outlined"
+              InputLabelProps={{ shrink: true }}
+              value={form.password}
+              onChange={onChange}
+              name={'password'}
+              type={showPassword ? 'text' : 'password'}
+              placeholder={'Mínimo 6 caracteres'}
+              required
+              pattern={"^.{6,}"}
+              title={"Sua senha deve ter no mínimo 6 caracteres."}
+            />
+            <StyledIcon onClick={(e) => setShowPassword(!showPassword)}>
+              {showPassword ? <Visibility /> : <VisibilityOff />}
+            </StyledIcon>
+          </StyledInputPassword>
+          <StyledInputPassword>
+            <TextField
+              margin='normal'
+              fullWidth
+              id="outlined-disabled" 
+              label="Confirmar senha" 
+              variant="outlined" 
+              InputLabelProps={{ shrink: true }}
+              value={passwordSnd}
+              name={'passwordSnd'}
+              onChange={(e) => setPasswordSnd(e.target.value)}
+              type={showPasswordSnd ? 'text' : 'password'}
+              placeholder={'Confirmar senha'}
+              required
+              helperText={helper}
+              error={error}  
+            />
+            <StyledIcon onClick={(e) => setShowPasswordSnd(!showPasswordSnd)}>
+              {showPasswordSnd ? <Visibility /> : <VisibilityOff />}
+            </StyledIcon>
+          </StyledInputPassword>
+          {isLoading ? <CircularProgress color={"primary"} size={24}/> 
+          : 
           <Button
             fullWidth 
             variant={"contained"} 
@@ -158,8 +151,8 @@ const CadastroForm = () => {
             margin={"normal"}
             type={"submit"}
           >
-            {isLoading ? <CircularProgress color={"primary"} size={24}/> : <>Criar</>}
-          </Button>
+            Criar
+          </Button>}
         </StyledForm>
       </InputContainer>
     </ScreenContainer>

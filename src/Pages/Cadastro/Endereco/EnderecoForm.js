@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { InputContainer, ScreenContainer, StyledForm } from '../../../Styles/Styled';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -6,9 +6,13 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import useForm from '../../../Hooks/useForm';
 import { addAdress } from '../../../services/User';
 import { useNavigate } from 'react-router-dom';
+import { GlobalStateContext } from '../../../Context/GlobalStateContext';
+import Header from '../../../Components/Header/Header';
 
 const EnderecoForm = () => {
     const navigate = useNavigate();
+    const { data } = useContext(GlobalStateContext);
+    const { setNameHeader, setButtonBack } = data;
     const [isLoading, setIsLoading] = useState(false);
     const { form, onChange, cleanField } = useForm({
         street: "",
@@ -19,6 +23,11 @@ const EnderecoForm = () => {
         complement: "",
     });
 
+    useEffect(() => {
+        setNameHeader("");
+        setButtonBack(true);
+    },[]);
+
     const onSubmitForm = (event) => {
         event.preventDefault();
         addAdress(form, navigate, cleanField, setIsLoading);
@@ -26,6 +35,7 @@ const EnderecoForm = () => {
 
     return (
         <ScreenContainer>
+            <Header/>
             <InputContainer>
                 <p>Meu Endereço</p>
                 <StyledForm onSubmit={onSubmitForm}>
@@ -107,6 +117,8 @@ const EnderecoForm = () => {
                         placeholder={'Estado'}
                         required
                     />
+                    {isLoading ? <CircularProgress color={"primary"} size={24}/> 
+                    : 
                     <Button
                         fullWidth 
                         variant={"contained"} 
@@ -114,8 +126,8 @@ const EnderecoForm = () => {
                         margin={"normal"}
                         type={"submit"}
                     >
-                        {isLoading ? <CircularProgress color={"primary"} size={24}/> : <>Salvar</>}
-                    </Button>
+                        Salvar
+                    </Button>}
                 </StyledForm>
             </InputContainer>
         </ScreenContainer>

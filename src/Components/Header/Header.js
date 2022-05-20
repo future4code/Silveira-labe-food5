@@ -1,37 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { GlobalStateContext } from "../../Context/GlobalStateContext";
 import { goBack } from "../../Routes/coordinator";
+import { StyledArrow, StyledButton, StyledEmpty, StyledHeader } from "./Styled";
 
 const Header = () => {
-    
-
     const navigate = useNavigate();
 
-    
-
-    const changeName = () => {
-        switch (key) {
-            case value:
-                
-                break;
-        
-            default:
-                break;
-        }
-    }
+    const { data } = useContext(GlobalStateContext);
+    const { nameHeader, buttonBack } = data;
 
     return (
-        <div>
-            <div>
-                <button onClick={ () => goBack(navigate) }><p>{"<"}</p></button>
+        <StyledHeader>
+            <div className="central">            
+                <div>
+                    { buttonBack ? <StyledButton onClick={ () => goBack(navigate) }><StyledArrow></StyledArrow></StyledButton> : <></>}
+                </div>
+                <div>
+                    <p>{nameHeader}</p>
+                </div>
+                <div>
+                    <StyledEmpty></StyledEmpty>
+                </div>
             </div>
-            <div>
-                <p>nome</p>
-            </div>
-            <div>
-                <div></div>
-            </div>
-        </div>
+        </StyledHeader>
     );
 }
 
