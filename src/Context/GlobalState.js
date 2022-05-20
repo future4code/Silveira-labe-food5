@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import { GlobalStateContext } from './GlobalStateContext'
-import { url } from '../constants/Url'
+import { url } from '../Constants/Url'
 // import {useparams} from "react-router-dom"
 
 export default function GlobalState(props) {
@@ -14,7 +14,8 @@ export default function GlobalState(props) {
 	// const [updateprofile, setupdateprofile] =useState({});
 	// const [order, setorder] = useState({});
 	
-	
+	const [ nameHeader, setNameHeader ] = useState("");
+	const [ buttonBack, setButtonBack ] = useState(false)
 	
 	// const getData = () => { 
 	
@@ -31,22 +32,22 @@ export default function GlobalState(props) {
 	
 	
 	useEffect(() => {
-	  getrestaurants(); 
+		getrestaurants(); 
 	//       getrestaurantsDetails(); 
 	//       getaddEndereco();
 	//       getEndereco();
 	//       getprofile();
 	//       getorder();
 	
-	  }, []); 
+	}, []); 
 	
 	const getrestaurants = () => {
-	    axios.get(url, {headers:{auth: "coloque seu token aqui"}})
-	    .then((response) => {
-	      setrestaurants(response.data.restaurants)
-	      })
-	      .catch((error) => console.log(error.message))
-	    };
+		axios.get(url, {headers:{auth: "coloque seu token aqui"}})
+		.then((response) => {
+			setrestaurants(response.data.restaurants)
+		})
+		.catch((error) => console.log(error.message))
+	};
 	
 	
 	
@@ -155,7 +156,11 @@ export default function GlobalState(props) {
 	
 	
 	const data = {
-	restaurants,
+		restaurants,
+		nameHeader,
+		setNameHeader,
+		buttonBack,
+		setButtonBack,
 	// setrestaurants,
 	// menu,
 	//        setmenu

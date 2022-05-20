@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-import { useForm } from '../../Hooks/useForm';
+// import { useForm } from '../../Hooks/useForm';
 import {InfoUser, Name, AddressUser, Historic} from './style'
 
-import { MainContainer, Header, Container, Title } from '../../Styles/style'
+import { MainContainer, Header, Container, Title } from '../../Styles/Styled'
 
 
 export default function Perfil () {

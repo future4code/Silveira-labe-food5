@@ -1,14 +1,15 @@
 import React from "react";
-import { Container, NomeContainer, Nome1, Nome2 } from "./TelaInicialStyle";
+import { InputContainer } from "../../Styles/Styled";
+import { Container, StyledLogoToast } from "./TelaInicialStyle";
 
-export default function HomePage() {
+export default function TelaInicial() {
   return (
     <Container>
-      <NomeContainer>
-        <Nome1>Future</Nome1>
-
-        <Nome2>Eats</Nome2>
-      </NomeContainer>
+      <InputContainer>
+        <StyledLogoToast>
+          <p id='main-text'>Future <span id='snd-text'>Eats</span></p>
+        </StyledLogoToast>
+      </InputContainer>
     </Container>
   );
 }
