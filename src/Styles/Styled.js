@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { primaryColor, primaryNeutralColor, secondaryColor, secondaryNeutralColor } from "../Constants/colors";
+import { primaryColor, secondaryColor } from "../Constants/colors";
 
 export const StyledLogo = styled.div `
     display: flex;
