@@ -14,7 +14,7 @@ const Header = () => {
         <StyledHeader>
             <div className="central">            
                 <div>
-                    { buttonBack ? <StyledButton onClick={ () => goBack(navigate) }><StyledArrow></StyledArrow></StyledButton> : <></>}
+                    { buttonBack ? <StyledButton onClick={ () => goBack(navigate) }><StyledArrow></StyledArrow></StyledButton> : <StyledEmpty></StyledEmpty>}
                 </div>
                 <div>
                     <p>{nameHeader}</p>

@@ -42,7 +42,7 @@ export default function GlobalState(props) {
 	}, []); 
 	
 	const getrestaurants = () => {
-		axios.get(url, {headers:{auth: "coloque seu token aqui"}})
+		axios.get(`${url}/restaurants`, {headers:{auth: localStorage.getItem("token")}})
 		.then((response) => {
 			setrestaurants(response.data.restaurants)
 		})
