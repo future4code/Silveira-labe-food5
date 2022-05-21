@@ -11,10 +11,11 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
 import { StyledIcon, StyledInputPassword, StyledVisibilityOff } from "../Cadastro/CadastroPages/Styled";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import useUnprotectedPage from "../../Hooks/useUnprotectedPage";
 
 const LoginPage = () => {
+  useUnprotectedPage();
   const navigate = useNavigate();
-
   const { form, onChange, cleanField } = useForm({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [ showPassword, setShowPassword ] = useState(false);

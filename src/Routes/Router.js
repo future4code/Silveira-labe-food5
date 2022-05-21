@@ -21,7 +21,7 @@ const Router = () => {
                 <Route path="/login" element={ <LoginPage  /> } />
                 <Route path="/home" element={ <HomePage  /> } />
                 <Route path="/perfil" element={ <PerfilPage  /> } />
-                <Route path="/restaurante" element={ <RestaurantePage  /> } />
+                <Route path="/restaurante/:id" element={ <RestaurantePage  /> } />
                 <Route path="/buscarRestaurante" element={ <BuscarRestaurante  /> } />
                 <Route path="/cadastro" element={ <CadastroPage  /> } />
                 <Route path="/endereco" element={ <EnderecoPage  /> } />

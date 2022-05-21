@@ -21,3 +21,7 @@ export const CadastroPage = (navigate) => {
 export const goToEndereco = (navigate) => {
     navigate("/endereco")
 }
+
+export const goToRestaurante = (navigate, id) => {
+    navigate(`/restaurante/${id}`);
+}
