@@ -1,50 +1,65 @@
 import React from 'react'
 import styled from 'styled-components'
+import { InputContainer, StyledButtonCard, StyledCard, StyledContainerPage, StyledDivButton, StyledDivCardInfo, StyledDivQtde, StyledImgCard, StyledInputDesc, StyledSections } from '../../Styles/Styled'
 
 const ImageSizing = styled.img`
-max-width: 200px;
-height: 200px;
+max-width: 50px;
+height: 50px;
 `
 
 const ProductsSection = (props) => {
 
     const menu = props.productsMenu.map((product) => {
         return (
-            <div 
-            key={product.id} 
-            category={product.category}
+            <StyledCard 
+                key={product.id} 
+                category={product.category}
             >
-                <div>
-                    <ImageSizing src = {product.photoUrl} alt={product.name} />
-                </div>
-                <h4> {product.name} </h4>
-                <p> {product.description} </p> 
-                <p> R${product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})} </p> 
-                <button onClick={() => console.log(product.id)}> Adicionar </button>
-            </div> 
+                <StyledImgCard>
+                    <img src = {product.photoUrl} alt={product.name} />
+                </StyledImgCard>
+                <StyledDivCardInfo>
+                    <StyledInputDesc>
+                        <p className='name'> {product.name} </p>
+                        <p className='description'> {product.description} </p>
+                    </StyledInputDesc>
+                    <StyledDivButton>
+                        <div className='price'>
+                            <p> R${product.price.toLocaleString('pt-br', {minimumFractionDigits: 2})} </p> 
+                        </div>
+                        <StyledButtonCard onClick={() => console.log(product.id)}> Adicionar </StyledButtonCard>
+                    </StyledDivButton>
+                </StyledDivCardInfo>
+            </StyledCard> 
         )
     })
 
     return(
-        <>
-            <h4> Principais </h4>
-            <hr/>
+        <InputContainer>
+            <StyledSections>
+                <h4> Principais </h4>
+                <hr/>
+            </StyledSections>
             {menu.filter((product) => {
                 return (product.props.category !== "Acompanhamento" && product.props.category !== "Bebida")
             })}
-
-            <h4> Acompanhamentos </h4>
-            <hr/>
+            
+            <StyledSections>
+                <h4> Acompanhamentos </h4>
+                <hr/>
+            </StyledSections>
+            
             {menu.filter((product) => {
                 return (product.props.category === "Acompanhamento")
             })}
-
-            <h4> Bebidas </h4>
-            <hr/> 
+            <StyledSections>
+                <h4> Bebidas </h4>
+                <hr/> 
+            </StyledSections>
             {menu.filter((product) => {
                 return (product.props.category === "Bebida")
             })}
-        </>
+        </InputContainer>
     )
 }
 export default ProductsSection;

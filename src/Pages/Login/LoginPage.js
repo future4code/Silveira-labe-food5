@@ -9,7 +9,7 @@ import { InputContainer, ScreenContainer, StyledForm, StyledLogo } from "../../S
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
-import { StyledIcon, StyledInputPassword } from "../Cadastro/CadastroPages/Styled";
+import { StyledIcon, StyledInputPassword, StyledVisibilityOff } from "../Cadastro/CadastroPages/Styled";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
 
 const LoginPage = () => {
@@ -77,7 +77,7 @@ const LoginPage = () => {
               required
             />
             <StyledIcon onClick={(e) => setShowPassword(!showPassword)}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
+              {showPassword ? <Visibility /> : <StyledVisibilityOff />}
             </StyledIcon>
           </StyledInputPassword>
 

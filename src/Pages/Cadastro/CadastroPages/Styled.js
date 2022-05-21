@@ -1,3 +1,4 @@
+import { VisibilityOff } from "@material-ui/icons";
 import styled from "styled-components";
 
 export const StyledInputPassword = styled.div `
@@ -15,4 +16,8 @@ export const StyledIcon = styled.div `
     right: 1.5rem;
     margin-top: 0.4rem;
     height: 100%;
+`;
+
+export const StyledVisibilityOff = styled(VisibilityOff) `
+    color: #B8B8B8;
 `;
