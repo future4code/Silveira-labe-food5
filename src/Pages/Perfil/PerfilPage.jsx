@@ -1,13 +1,9 @@
 import React from 'react';
-
-
-// import { useForm } from '../../Hooks/useForm';
-import {InfoUser, Name, AddressUser, Historic} from './style'
-
+import {InfoUser, Name, AddressUser, Historic} from './Styled'
 import { MainContainer, Header, Container, Title } from '../../Styles/Styled'
 
 
-export default function Perfil () {
+function Perfil () {
 
 
     return (
@@ -46,7 +42,7 @@ export default function Perfil () {
     );
 }
 
-
+export default Perfil;
 
 
 

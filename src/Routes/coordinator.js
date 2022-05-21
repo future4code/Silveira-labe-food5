@@ -3,7 +3,7 @@ export const goToPage = (navigate, pageIndex) => {
 }
 
 export const goToHomePage = (navigate) => {
-    navigate('/');
+    navigate('/home');
 }
 
 export const goBack = (navigate) => {
