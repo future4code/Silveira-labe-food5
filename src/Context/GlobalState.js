@@ -16,7 +16,8 @@ export default function GlobalState(props) {
 	
 	const [ nameHeader, setNameHeader ] = useState("");
 	const [ buttonBack, setButtonBack ] = useState(false)
-	
+	const [ category, setCategory ] = useState("")
+
 	// const getData = () => { 
 	
 	//         axios.get(`${url}${endpoint}`, {
@@ -161,6 +162,8 @@ export default function GlobalState(props) {
 		setNameHeader,
 		buttonBack,
 		setButtonBack,
+		category,
+		setCategory,
 	// setrestaurants,
 	// menu,
 	//        setmenu

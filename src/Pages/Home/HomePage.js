@@ -6,14 +6,15 @@ import { StyledDivImage, StyledDivRestaurant, StyledSearch, StyledSearchIcon } f
 import ScrollableTabs from './ScrollableTabs';
 import { useNavigate } from 'react-router-dom';
 import { goToRestaurante } from '../../Routes/coordinator';
+import useProtectedPage from '../../Hooks/useProtectedPage';
 
 
 export default function HomePage () {
-    const [ category, setCategory ] = useState("")
     const [ search, setSearch ] = useState("");
     const { data } = useContext(GlobalStateContext);
-    const { restaurants, setNameHeader, setButtonBack } = data;
+    const { restaurants, setNameHeader, setButtonBack, category } = data;
     const navigate = useNavigate();
+    useProtectedPage();
 
     const onClickCard = (id) => {
         goToRestaurante(navigate, id);
@@ -26,9 +27,10 @@ export default function HomePage () {
         setButtonBack(false);
     },[]);
 
-    const RestaurantesOp = restaurants && restaurants.filter( ( (restaurant) => { 
+    const restaurantesOp = restaurants && restaurants.filter( ( (restaurant) => { 
         return ( !search ? true : restaurant.name.toLowerCase().includes(search.toLowerCase()))
-    })).map( (restaurant) => { 
+       && ( !category ? true : restaurant.category.toLowerCase().includes(category.toLowerCase()))
+    })).map( (restaurant) => {
         return( 
             <StyledDivRestaurant key={restaurant.id}>
                 <StyledDivImage onClick={()=> onClickCard(restaurant.id)}>
@@ -42,16 +44,10 @@ export default function HomePage () {
                     <p>Frete R${restaurant.shipping},00</p>
                 </div>
             </StyledDivRestaurant>
-    )}) 
+        )
+    }) 
 
-    const restaurantFilter = ( type ) => { 
-        if( type === category) { 
-            setCategory("")
-        }
-        else{
-            setCategory(type)
-        } 
-    } 
+    console.log(restaurants);
 
     return(
         <ScreenContainer>
@@ -70,8 +66,8 @@ export default function HomePage () {
                             onChange={onChangeSearch}
                         />
                     </StyledSearch>
-                    <ScrollableTabs/>
-                    {RestaurantesOp}
+                    <ScrollableTabs />
+                    {restaurantesOp.length > 0 ? restaurantesOp : <p>{"Não encontramos :("}</p>}
                 </StyledContainerPage>
             </InputContainer>
         </ScreenContainer>

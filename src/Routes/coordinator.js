@@ -1,3 +1,5 @@
+const token = localStorage.getItem('token')
+
 export const goToPage = (navigate, pageIndex) => {    
     navigate(pageIndex); 
 }

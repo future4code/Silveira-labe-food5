@@ -1,7 +1,10 @@
 import styled from "styled-components";
-import { mainColor, secondaryColor } from "../../Constants/colors";
+import { mainColor, primaryColor, secondaryColor } from "../../Constants/colors";
 import { alpha, makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 import SearchIcon from '@material-ui/icons/Search';
+import Tabs from '@material-ui/core/Tabs';
+import { Tab } from "@material-ui/icons";
 
 export const StyledDivRestaurant = styled.div `
     display: flex;
@@ -70,4 +73,12 @@ export const StyledSearch = styled.div `
 
 export const StyledSearchIcon = styled(SearchIcon) `
     color: ${mainColor};
+`;
+
+export const StyledAppBar = styled(AppBar) `
+    /* text-transform: 'capitalize';
+
+    &:active {
+        background-color: beige;
+    } */
 `;
