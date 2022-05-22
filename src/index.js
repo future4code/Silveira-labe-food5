@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TelaInicial from './components/TelaInicial/TelaInicial';
+import TelaInicial from './Components/TelaInicial/TelaInicial';
 
 
 ReactDOM.render(
