@@ -1,85 +1,67 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import axios from 'axios'
 import {url} from '../../Constants/Url'
 import ProductsSection from '../../Components/ProductSection/ProductSection';
-import ShowModal from '../../Components/modal/Modal';
-import { useGlobal } from '../../Context/GlobalStateContext';
+import { InputContainer, ScreenContainer, StyledContainerPage, StyledRestaurant } from '../../Styles/Styled';
+import Header from '../../Components/Header/Header';
+import { GlobalStateContext } from '../../Context/GlobalStateContext';
+
 
 export default function Restaurante () {
-    const [restaurantDetails, setRestaurantDetails] = useState([]);
-    const [products, setProducts] = useState([])
-    const [product, setProduct] = useState(false)
-    const [open, setOpen] = useState(false)
-    const [quantity, setQuantity] = useState('')
-    const token = localStorage.getItem("token")
-    const {data} = useGlobal();
-    const {cart, setCart} = data
+
+    const { data } = useContext(GlobalStateContext);
+    const { setNameHeader, setButtonBack } = data;
+
+    const [restaurantDetails, setRestaurantDetails] = useState([])
+    const [productsMenu, setProductsMenu] = useState([])
+
+    const URL = `${url}/restaurants/1`;
 
     useEffect(() => {
-        getrestaurantsDetails();
-      }, []);
+        setNameHeader("Restaurante");
+        setButtonBack(true);
+    },[]);
 
-    const getrestaurantsDetails = () => {
-        axios
-          .get(`${url}/restaurants/5`, {
-            headers: { auth: token },
-          })
-          .then((response) => {
-            setRestaurantDetails(response.data.restaurant);
-            setProducts(response.data.restaurant.products)
-          })
-          .catch((error) => console.log(error.message));
-      };
+    const getRestaurantData = () => {
+        const token = localStorage.getItem('token')
 
-      const handleOpen = () => {
-        setOpen(true)
-      }
-    
-      const handleClose = () => {
-        setOpen(false)
-      }
+        axios.get(URL, {headers: {
+            auth: token
+        }})
+        .then((res) => {
+            setRestaurantDetails(res.data.restaurant)
+            setProductsMenu(res.data.restaurant.products)
+        }).catch((err) => {
+            console.log(err.data)
+        })
+    }
 
-      const addToCartOrder = (id, quantity) => {
-        const newCart = cart
-        newCart.products.push({id: id, quantity: quantity})
-        setCart(newCart)
-        console.log(cart)
-      }
-
-
+    useEffect(() => {
+        getRestaurantData()
+    }, [URL])
+ 
     return (
-      <div>
-        <ShowModal
-          handleOpen={handleOpen}
-          handleClose={handleClose}
-          open={open}
-          quantity={quantity}
-          setQuantity={setQuantity}
-          product={product}
-          addToCartOrder={addToCartOrder}
-        />
-        <div>
-          <img src={restaurantDetails.logoUrl} alt={"Logo do restaurante"} />
-        </div>
-        <h2> {restaurantDetails.name} </h2>
-        <p> {restaurantDetails.category} </p>
-        <span> {restaurantDetails.deliveryTime} min </span>
-        <span>
-          Frete:
-          {restaurantDetails.shipping === 0
-            ? "Grátis"
-            : `R$ ${restaurantDetails.shipping},00`}
-        </span>
-        <p> {restaurantDetails.address} </p>
-
-        <div>
-          <ProductsSection
-            products={products}
-            handleOpen={handleOpen}
-            setProduct={setProduct}
-            addToCartOrder={addToCartOrder}
-          />
-        </div>
-      </div>
+        <ScreenContainer>
+            <Header/>
+            <InputContainer>
+                <StyledContainerPage>
+                    <StyledRestaurant>
+                        <div className='div-img'>
+                            <img className='img' src={restaurantDetails.logoUrl} alt={"Logo do restaurante"}/> 
+                        </div>
+                        <h2 className='name-restaurant'> {restaurantDetails.name} </h2>
+                        <p> {restaurantDetails.category} </p> 
+                        <div className='time-shipping'>
+                            <span>{restaurantDetails.deliveryTime} min</span>
+                            <span>Frete: {restaurantDetails.shipping === 0 ? "Grátis" : `R$ ${restaurantDetails.shipping},00`}</span> 
+                        </div>
+                        <p> {restaurantDetails.address} </p> 
+                    </StyledRestaurant>
+                    <div>
+                        <ProductsSection productsMenu={productsMenu} />
+                    </div>
+                </StyledContainerPage>
+            </InputContainer>
+        </ScreenContainer>
     );
 }

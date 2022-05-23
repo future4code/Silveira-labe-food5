@@ -12,7 +12,7 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { ScreenContainer, InputContainer, StyledLogo, StyledForm } from '../../../Styles/Styled.js';
 import { GlobalStateContext } from '../../../Context/GlobalStateContext.js';
 import Header from '../../../Components/Header/Header.js';
-import { StyledIcon, StyledInputPassword } from './Styled.js';
+import { StyledIcon, StyledInputPassword, StyledVisibilityOff } from './Styled.js';
 
 const CadastroForm = () => {
   const navigate = useNavigate();
@@ -118,7 +118,7 @@ const CadastroForm = () => {
               title={"Sua senha deve ter no mínimo 6 caracteres."}
             />
             <StyledIcon onClick={(e) => setShowPassword(!showPassword)}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
+              {showPassword ? <Visibility /> : <StyledVisibilityOff />}
             </StyledIcon>
           </StyledInputPassword>
           <StyledInputPassword>
@@ -139,7 +139,7 @@ const CadastroForm = () => {
               error={error}  
             />
             <StyledIcon onClick={(e) => setShowPasswordSnd(!showPasswordSnd)}>
-              {showPasswordSnd ? <Visibility /> : <VisibilityOff />}
+              {showPasswordSnd ? <Visibility /> : <StyledVisibilityOff />}
             </StyledIcon>
           </StyledInputPassword>
           {isLoading ? <CircularProgress color={"primary"} size={24}/> 

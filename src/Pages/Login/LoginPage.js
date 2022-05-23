@@ -9,12 +9,13 @@ import { InputContainer, ScreenContainer, StyledForm, StyledLogo } from "../../S
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Button from '@material-ui/core/Button';
-import { StyledIcon, StyledInputPassword } from "../Cadastro/CadastroPages/Styled";
+import { StyledIcon, StyledInputPassword, StyledVisibilityOff } from "../Cadastro/CadastroPages/Styled";
 import { Visibility, VisibilityOff } from "@material-ui/icons";
+import useUnprotectedPage from "../../Hooks/useUnprotectedPage";
 
 const LoginPage = () => {
+  useUnprotectedPage();
   const navigate = useNavigate();
-
   const { form, onChange, cleanField } = useForm({ email: "", password: "" });
   const [isLoading, setIsLoading] = useState(false);
   const [ showPassword, setShowPassword ] = useState(false);
@@ -77,7 +78,7 @@ const LoginPage = () => {
               required
             />
             <StyledIcon onClick={(e) => setShowPassword(!showPassword)}>
-              {showPassword ? <Visibility /> : <VisibilityOff />}
+              {showPassword ? <Visibility /> : <StyledVisibilityOff />}
             </StyledIcon>
           </StyledInputPassword>
 

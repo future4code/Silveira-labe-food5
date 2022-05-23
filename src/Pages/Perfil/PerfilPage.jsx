@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useLayoutEffect } from 'react'
-import {GlobalStateContext} from '../../Context/GlobalStateContext';
-import { useNavigate } from 'react-router-dom';
-import { getProfile, getOrdersHistory } from '../../services/ProfilePage';
-// import { useForm } from '../../Hooks/useForm';
-import {AddressUser, Historic, HistoricContainer, Header, Container} from './style'
+import React from 'react';
+import {InfoUser, Name, AddressUser, Historic} from './Styled'
+import { MainContainer, Header, Container, Title } from '../../Styles/Styled'
 
-export default function Perfil() {
+function Perfil() {
     const navigate = useNavigate()
     const params = useContext(GlobalStateContext)
   
@@ -61,7 +58,7 @@ export default function Perfil() {
     );
 }
 
-
+export default Perfil;
 
 
 

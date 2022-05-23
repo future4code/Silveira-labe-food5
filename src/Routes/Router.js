@@ -19,6 +19,7 @@ const Router = () => {
             <Routes>
                 <Route index element={<TelaInicial />} />
                 <Route path="/login" element={ <LoginPage  /> } />
+                <Route path="/home" element={ <HomePage  /> } />
                 <Route path="/perfil" element={ <PerfilPage  /> } />
                 <Route path="/restaurante/:id" element={ <RestaurantePage  /> } />
                 <Route path="/buscarRestaurante" element={ <BuscarRestaurante  /> } />

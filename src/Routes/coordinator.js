@@ -1,9 +1,11 @@
+
+
 export const goToPage = (navigate, pageIndex) => {    
     navigate(pageIndex); 
 }
 
 export const goToHomePage = (navigate) => {
-    navigate('/');
+    navigate('/home');
 }
 
 export const goBack = (navigate) => {
@@ -24,4 +26,8 @@ export const RestaurantDetail = (navigate, id) => {
 
 export const goToEndereco = (navigate) => {
     navigate("/endereco")
+}
+
+export const goToRestaurante = (navigate, id) => {
+    navigate(`/restaurante/${id}`);
 }

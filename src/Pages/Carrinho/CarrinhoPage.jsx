@@ -1,80 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import { useGlobal } from '../../Context/GlobalStateContext';
-import { url } from '../../constants/Url';
-import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react';
+import Header from '../../Components/Header/Header';
+import { GlobalStateContext } from '../../Context/GlobalStateContext';
+import { InputContainer, ScreenContainer, StyledContainerPage } from '../../Styles/Styled';
+import { StyledAdress, StyledHr, StyledPagamento, StyledTotalPrice } from './Styled';
+import Button from '@material-ui/core/Button';
 
-export default function Carrinho() {
-  const { states } = useGlobal();
-  const { address, cartProducts } = states;
-  const [restaurantDetails, setRestaurantDetails] = useState([]);
+function Carrinho () {
+    const { data } = useContext(GlobalStateContext);
+    const { setNameHeader, setButtonBack } = data;
+    const [ pagamento, setPagamento ] = useState({cartao: false, dinheiro: false});
 
-  useEffect(() => {
-    getRestaurantData();
-  }, []);
+    useEffect(() => {
+        setNameHeader("Meu Carrinho");
+        setButtonBack(false);
+    },[]);
 
-  const getRestaurantData = () => {
-    const URL = `${url}/restaurants/1`;
-    const token = localStorage.getItem("token");
+    const onChangeDinheiro = (e) => {
+        setPagamento({cartao: false, dinheiro: true})
+    }
 
-    axios
-      .get(URL, {
-        headers: { auth: token },
-      })
-      .then((response) => {
-        setRestaurantDetails(response.data.restaurant);
-      })
-      .catch((error) => console.log(error.message));
-  };
+    const onChangeCartao = (e) => {
+        setPagamento({cartao: true, dinheiro: false})
+    }
 
-  return (
-    <main>
-      <div>
-        <p> Endereço de entrega </p>
-        <p>
-          {" "}
-          {address.street}, {address.number}{" "}
-        </p>
-      </div>
+    return (
+        <ScreenContainer>
+            <Header/>
+            <StyledAdress>
+                <div className='text-adress'>
+                    <p className='text'>Endereço de entrega</p>
+                    <p className='adress'>Endereço de entrega</p>
+                </div>
+            </StyledAdress>
+            <InputContainer>
+                <p>Carrinho vazio</p>
+                <StyledContainerPage>
+                    <StyledTotalPrice>
+                        <div className='frete'>
+                            <p>Frete: R$0,00</p>
+                        </div>
+                        <div className='total'>
+                            <p>SUBTOTAL:</p>
+                            <p className='valor'>R$0,00</p>
+                        </div>
+                        <div className='forma-pagamento'>
+                            <p>Forma de pagamento</p>
+                        </div>
+                        <StyledHr/>
+                    </StyledTotalPrice>
+                    <StyledPagamento>
+                        <div className='input-pagamento'>
+                            <div>
+                                <input name="dinheiro" value={pagamento} onChange={onChangeDinheiro} type='radio' checked={pagamento.dinheiro}/>
+                                <label for="dinheiro" >Dinheiro</label>
+                            </div>
+                            <div>
+                                <input name="cartao" value={pagamento} onChange={onChangeCartao} type='radio' checked={pagamento.cartao}/>
+                                <label for="cartao">Cartão</label>
+                            </div>
+                        </div>
+                        
+                    </StyledPagamento>
+                    <Button
+                        fullWidth 
+                        variant={"contained"} 
+                        color={"secondary"} 
+                        margin={"normal"}
+                        type={"submit"}
+                    >
+                        Confirmar
+                    </Button>
+                </StyledContainerPage>
+            </InputContainer>
+        </ScreenContainer>
+    );
+};
 
-      <div>
-        <p> {restaurantDetails.name} </p>
-        <p> {restaurantDetails.category} </p>
-        <span> {restaurantDetails.deliveryTime} min </span>
-        <span>
-          Frete:
-          {restaurantDetails.shipping === 0
-            ? "Grátis"
-            : `R$ ${restaurantDetails.shipping},00`}
-        </span>
-        <p> {restaurantDetails.address} </p>
-      </div>
-
-      <div>
-          Carrinho vazio :/
-      </div>
-
-      <div>
-        <p> SUBTOTAL </p>
-        <span>
-          Frete:
-          {restaurantDetails.shipping === 0
-            ? "Grátis"
-            : `R$ ${restaurantDetails.shipping},00`}{" "}
-        </span>
-        <span> R$ 00,00 </span>
-      </div>
-
-      <div>
-        <form>
-          <p> Forma de pagamento </p>
-          <hr />
-          <input type="checkbox" id='money'/>
-          <label for='money'> Dinheiro </label>
-          <input type="checkbox" id='credit'/>
-            <label for='credit'> Cartão de crédito </label>
-          <button>Confirmar </button>
-        </form>
-      </div>
-    </main>
-  );
-}
+export default Carrinho;
