@@ -13,3 +13,7 @@ export const goBack = (navigate) => {
 export const CadastroPage = (navigate) => {
     navigate("/cadastro")
 }
+
+export const RestaurantDetail = (navigate, id) => {
+    navigate(`restaurante/${id}`)
+}

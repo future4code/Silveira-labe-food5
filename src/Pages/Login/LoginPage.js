@@ -10,16 +10,15 @@ import { Container, HeaderContainer, Nome1, Nome2, Titulo, InputsContainer, Butt
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { form, onChange, clear } = useForm({ email: "", password: "" });
+  const { form, onChange, cleanField } = useForm({ email: "", password: "" });
   const login = (event) => {
     event.preventDefault();
     axios
-      .post(`${url}/users/login`, form)
+      .post(`${url}/login`, form)
       .then((res) => {
-        console.log(res.data.token);
         localStorage.setItem("token", res.data.token);
         goToHomePage(navigate);
-        clear();
+        cleanField();
       })
       .catch((error) => {
         alert(error);
@@ -52,8 +51,8 @@ const LoginPage = () => {
             placeholder="Mínimo 6 caracteres"
             name="password"
             type={"password"}
-            value={""}
-            onChange={""}
+            value={form.password}
+            onChange={onChange}
             pattern={"^.{6,}"}
             margin={"normal"}
             variant={"outlined"}

@@ -1,8 +1,6 @@
 import React from 'react';
-
 import Router from './Routes/Router';
 import GlobalState from './Context/GlobalState';
-
 
 export default function App() {
 	return (
@@ -14,19 +12,6 @@ export default function App() {
 		</>
 	);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* 
