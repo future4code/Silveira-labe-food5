@@ -19,6 +19,8 @@ export default function GlobalState(props) {
   // const [profile, setprofile] = useState({});
   // const [updateprofile, setupdateprofile] = useState({});
   // const [order, setorder] = useState({});
+  const [ nameHeader, setNameHeader ] = useState("");
+	const [ buttonBack, setButtonBack ] = useState(false)
 
   // const getData = () => {
 
@@ -147,14 +149,18 @@ export default function GlobalState(props) {
   const data = {
     restaurants,
     setrestaurants,
-	restaurantDetails,
-	setRestaurantDetails,
-  cartProducts,
-  setCartProducts,
-  cart, 
-  setCart,
-  address,
-  setaddress
+    restaurantDetails,
+    setRestaurantDetails,
+    cartProducts,
+    setCartProducts,
+    cart, 
+    setCart,
+    address,
+    setaddress,
+    nameHeader,
+    setNameHeader,
+    buttonBack,
+    setButtonBack,
   };
 
   const states = {address, cartProducts};

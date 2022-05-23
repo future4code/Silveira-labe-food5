@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
-import {url} from '../../constants/Url'
+import {url} from '../../Constants/Url'
 import ProductsSection from '../../Components/ProductSection/ProductSection';
 import ShowModal from '../../Components/modal/Modal';
 import { useGlobal } from '../../Context/GlobalStateContext';
