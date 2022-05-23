@@ -9,7 +9,7 @@ height: 50px;
 
 const ProductsSection = (props) => {
 
-    const menu = props.productsMenu.map((product) => {
+    const menu = props.products.map((product) => {
         return (
             <StyledCard 
                 key={product.id} 

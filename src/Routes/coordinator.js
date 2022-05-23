@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token')
+
 
 export const goToPage = (navigate, pageIndex) => {    
     navigate(pageIndex); 
@@ -18,6 +18,10 @@ export const goToLogin = (navigate) => {
 
 export const CadastroPage = (navigate) => {
     navigate("/cadastro")
+}
+
+export const RestaurantDetail = (navigate, id) => {
+    navigate(`restaurante/${id}`)
 }
 
 export const goToEndereco = (navigate) => {
