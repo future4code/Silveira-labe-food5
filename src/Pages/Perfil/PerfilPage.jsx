@@ -2,29 +2,35 @@ import React from 'react';
 import {InfoUser, Name, AddressUser, Historic} from './Styled'
 import { MainContainer, Header, Container, Title } from '../../Styles/Styled'
 
-
-function Perfil () {
-
+function Perfil() {
+    const navigate = useNavigate()
+    const params = useContext(GlobalStateContext)
+  
+    useLayoutEffect(() => {
+      getProfile(params.setUser)
+      getOrdersHistory(params.setHistory)
+    }, []);
 
     return (
-        <MainContainer>
+        <div>
             
             <Header>
-                <Title>Meu Perfil</Title>
+                <p>Meu Perfil</p>
             </Header>
 
             <Container>
 
-                <InfoUser >
+                <div >
                     {/* O Container InfoUser tem que permitir um click mandando para a alteracao da informacoes do usuario */}
-                    <Name>nome do user</Name>
-                    <Name>email do user</Name>
-                    <Name>cpf do user</Name>
-                </InfoUser>
+                    <p>{params.user.name}</p>
+                    <p>{params.user.email}</p>
+                    <p>{params.user.cpf}</p>
+                </div>
 
                 <AddressUser>
                     {/* O Container AddressUser tem que permitir a um click para alteracao da informacao de endereco do usuario, pois o usuario pode mudar de casa um dia */}
-                    <Name> endereco do usuario </Name>
+                    <p>Endereço cadastrado</p>
+                    <p>Endereço: {params.user.address}</p>
                 </AddressUser>
 
                 <Historic>
@@ -32,13 +38,23 @@ function Perfil () {
                         Esse Container sera para mostrar o historico de pedidos que o perfil tem , mostrando o  RESTAURANTE , A DATA DO PEDIDO, E O VALOR;
                         A ideia e a de colocar o historico de pedidos em uma variavel no globalState e depois fazer um map do array aqui nesse container
                     */}
-                        <p>historico de pedidos que o perfil tem , mostrando o  RESTAURANTE , A DATA DO PEDIDO, E O VALOR</p>
+                        <p>Histórico de pedidos</p>
                 </Historic>
 
+                {(params.user && params.history) && params.history.map(res => (
+          <HistoricContainer key={res.createdAt}>
+            <p style={{ color: "#5cb646" }}>{res.restaurantName}</p>
+            <p style={{ fontSize: "12px" }} >{new Date(res.createdAt).toISOString().split("T")[0].split('-').reverse().join('/')}</p>
+            <p style={{ fontSize: "12px" }} >Pedido: {new Date(res.createdAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <p style={{ fontSize: "12px" }} >Entrega: {new Date(res.expiresAt).toISOString().split("T")[1].slice(0, 5)}</p>
+            <b>SUBTOTAL R${res.totalPrice.toFixed(2).replace('.', ',')}</b>
+
+          </HistoricContainer>
+        ))}
 
             </Container>
 
-        </MainContainer>
+        </div>
     );
 }
 

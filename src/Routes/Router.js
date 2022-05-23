@@ -10,7 +10,7 @@ import BuscarRestaurante from '../Pages/BuscarRestaurante/BuscarRestaurante'
 import CadastroPage from '../Pages/Cadastro/CadastroPages/CadastroPage.js'
 import CarrinhoPage from '../Pages/Carrinho/CarrinhoPage'
 import EnderecoPage from '../Pages/Cadastro/Endereco/EnderecoPage.js';
-import TelaInicial from '../Pages/Login/TelaInicial';
+import TelaInicial from '../Components/TelaInicial/TelaInicial';
 
 
 const Router = () => {
