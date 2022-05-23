@@ -17,19 +17,6 @@ export default function App() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 
 
 	Gente acredito que a parte das paginas precisa de reformulacao ,
